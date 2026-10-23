@@ -58,18 +58,34 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 window.handleAuth = async () => {
-  const email=document.getElementById('emailInput').value.trim();
-  const pass=document.getElementById('passInput').value.trim();
-  const msg=document.getElementById('authMsg');
-  const btn=document.getElementById('loginBtn');
+  const email = document.getElementById('emailInput').value.trim();
+  const pass = document.getElementById('passInput').value.trim();
+  const msg = document.getElementById('authMsg');
+  const btn = document.getElementById('loginBtn');
   if(!email||!pass){msg.innerText="Isi email & password!";return}
   if(pass.length<6){msg.innerText="Password min 6!";return}
   btn.innerText="LOADING...";btn.disabled=true;msg.innerText="";
-  try{await signInWithEmailAndPassword(auth,email,pass);}catch(err){
-    if(err.code==='auth/user-not-found'||err.code==='auth/invalid-credential'||err.code==='auth/invalid-login-credentials'){
-      try{await createUserWithEmailAndPassword(auth,email,pass);}catch(e2){msg.innerText=e2.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return}
-    }else{msg.innerText=err.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return}
+  try{
+    await signInWithEmailAndPassword(auth,email,pass);
+  }catch(err){
+    if(err.code=='auth/user-not-found' || err.code=='auth/invalid-credential' || err.code=='auth/invalid-login-credentials'){
+      try{ await createUserWithEmailAndPassword(auth,email,pass); }
+      catch(e2){ msg.innerText=e2.message; btn.innerText="MASUK / DAFTAR 🔥"; btn.disabled=false; return; }
+    }else{
+      msg.innerText=err.message; btn.innerText="MASUK / DAFTAR 🔥"; btn.disabled=false; return;
+    }
   }
   btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;
 };
-window.logout=async()=>{await signOut
+
+onAuthStateChanged(auth,(user)=>{
+  if(user){
+    document.getElementById('loginPage').style.display='none';
+    document.getElementById('appPage').style.display='block';
+  }else{
+    document.getElementById('loginPage').style.display='flex';
+    document.getElementById('appPage').style.display='none';
+  }
+});
+
+window.logout=async()=>{ await signOut(auth); };
