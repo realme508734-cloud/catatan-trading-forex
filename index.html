@@ -43,15 +43,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// === CONFIG LENGKAP PUNYA LU - UDAH GABUNG ===
-const firebaseConfig = {
+
+  const firebaseConfig = {
   apiKey: "AIzaSyDXuveftNQPLHw_2CQ4gLiB1MqGx8u8Fjg",
   authDomain: "catatan-trading-forex.firebaseapp.com",
   projectId: "catatan-trading-forex",
   storageBucket: "catatan-trading-forex.firebasestorage.app",
   messagingSenderId: "615987792529",
   appId: "1:615987792529:web:228d5253a125b43d324d30"
-};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
