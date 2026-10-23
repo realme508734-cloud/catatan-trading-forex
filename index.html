@@ -2,78 +2,74 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catatan Trading Forex</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SENGKU PRO - Jurnal XAUUSD</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;padding:20px}
-.container{max-width:900px;margin:0 auto}
-h1{text-align:center;color:#38bdf8;margin:20px 0;font-size:28px}
-.card{background:#1e293b;border-radius:16px;padding:20px;margin-bottom:20px;border:1px solid #334155}
-.card h2{color:#38bdf8;margin-bottom:15px;font-size:18px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
-input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:white;font-size:14px}
-label{font-size:12px;color:#94a3b8;margin-bottom:6px;display:block;margin-top:8px}
-button{width:100%;padding:14px;background:#0ea5e9;color:white;border:none;border-radius:10px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:10px}
-button:hover{background:#0284c7}
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{padding:10px;text-align:left;border-bottom:1px solid #334155;font-size:13px}
-th{color:#94a3b8;font-size:11px;text-transform:uppercase}
-.badge{padding:4px 8px;border-radius:20px;font-size:11px;font-weight:bold}
-.profit{background:#14532d;color:#4ade80}
-.loss{background:#7f1d1d;color:#f87171}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-.stat{background:#1e293b;padding:15px;border-radius:12px;text-align:center;border:1px solid #334155}
-.stat b{display:block;font-size:20px;margin-top:5px}
-.stat.profit b{color:#4ade80}
-.stat.loss b{color:#f87171}
+body{background:#070708;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+.card{background:#151515;border:1px solid #222;border-radius:24px;padding:24px}
+.btn{width:100%;background:#fff;color:#000;font-weight:900;padding:16px;border-radius:16px;border:0;font-size:15px;cursor:pointer}
+.btn:disabled{opacity:.5}
+input,select,textarea{width:100%;background:#111;border:1px solid #222;border-radius:12px;padding:14px;color:#fff;margin-bottom:12px;font-size:14px;outline:none}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+.stat{background:#151515;border:1px solid #222;border-radius:16px;padding:14px;text-align:center}
+.trade{background:#151515;border:1px solid #222;border-radius:16px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between}
+.badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:700}
+.badge-buy{background:#052e16;color:#22c55e;border:1px solid #14532d}
+.badge-sell{background:#2e0505;color:#ef4444;border:1px solid #7f1d1d}
+.small{font-size:11px;color:#666}
 </style>
 </head>
 <body>
-<div class="container">
-<h1>📈 Catatan Trading Forex</h1>
-<div class="stats">
-<div class="stat">Total Trade<b id="totalTrade">0</b></div>
-<div class="stat profit">Profit<b id="totalProfit">0</b></div>
-<div class="stat loss">Win Rate<b id="winRate">0%</b></div>
-</div>
-<div class="card">
-<h2>➕ Tambah Trade Baru</h2>
-<div class="grid">
-<div><label>Tanggal</label><input type="date" id="tanggal"></div>
-<div><label>Pair</label><select id="pair"><option>EURUSD</option><option>GBPUSD</option><option>XAUUSD</option><option>USDJPY</option><option>GBPJPY</option><option>EURJPY</option><option>AUDUSD</option><option>USDCAD</option></select></div>
-<div><label>Posisi</label><select id="posisi"><option>BUY</option><option>SELL</option></select></div>
-<div><label>Lot</label><input type="number" id="lot" step="0.01" value="0.01"></div>
-<div><label>Entry</label><input type="number" id="entry" step="0.00001" placeholder="1.08500"></div>
-<div><label>Exit</label><input type="number" id="exitPrice" step="0.00001" placeholder="1.08700"></div>
-<div><label>Profit $</label><input type="number" id="profit" step="0.01" placeholder="15.5 / -10"></div>
-<div><label>Strategi</label><select id="strategi"><option>Breakout</option><option>Supply Demand</option><option>SMC</option><option>Support Resistance</option><option>Scalping</option></select></div>
-</div>
-<label>Catatan</label><textarea id="catatan" rows="2" placeholder="Alasan entry, emosi, kesalahan..."></textarea>
-<button onclick="tambahTrade()">Simpan Trade</button>
-</div>
-<div class="card">
-<h2>📊 Riwayat Trade</h2>
-<div style="overflow-x:auto">
-<table>
-<thead><tr><th>Tanggal</th><th>Pair</th><th>Posisi</th><th>Profit</th><th>Catatan</th><th></th></tr></thead>
-<tbody id="tbody"></tbody>
-</table>
-</div>
-<button onclick="hapusSemua()" style="background:#334155;margin-top:15px">Hapus Semua Data</button>
+<div id="loginPage" style="max-width:400px;margin:0 auto;min-height:100vh;display:flex;align-items:center;padding:20px">
+<div class="card" style="width:100%">
+<h1 style="font-size:28px;font-weight:900">SENGKU PRO</h1>
+<p style="color:#888;font-size:13px;margin-bottom:16px">Jurnal XAUUSD • Cloud Active</p>
+<div style="background:#111;border:1px solid #22c55e33;border-radius:12px;padding:12px;margin-bottom:16px"><p style="font-size:11px;color:#22c55e;font-weight:700">● CONFIG ASLI TERPASANG - SIAP JUALAN</p><p style="font-size:10px;color:#888;margin-top:4px">Project: catatan-trading-forex<br>Auth: Email/Password Enabled ✅</p></div>
+<input id="emailInput" type="email" placeholder="Email" value="realme508734@gmail.com">
+<input id="passInput" type="password" placeholder="Password min 6">
+<button class="btn" id="loginBtn" onclick="handleAuth()">MASUK / DAFTAR 🔥</button>
+<p id="authMsg" class="small" style="text-align:center;margin-top:12px;color:#ef4444"></p>
 </div>
 </div>
-<script>
-let trades=JSON.parse(localStorage.getItem('forex_trades')||'[]');
-function render(){
-const tbody=document.getElementById('tbody');tbody.innerHTML='';let profitTotal=0,win=0;
-trades.forEach((t,i)=>{profitTotal+=parseFloat(t.profit);if(t.profit>0)win++;tbody.innerHTML+=`<tr><td>${t.tanggal}</td><td><b>${t.pair}</b></td><td>${t.posisi}</td><td><span class="badge ${t.profit>=0?'profit':'loss'}">${t.profit}$</span></td><td style="max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${t.catatan}</td><td><button onclick="hapus(${i})" style="padding:4px 8px;width:auto;background:#7f1d1d;font-size:11px">X</button></td></tr>`;});
-document.getElementById('totalTrade').innerText=trades.length;document.getElementById('totalProfit').innerText='$'+profitTotal.toFixed(2);document.getElementById('winRate').innerText=trades.length?Math.round(win/trades.length*100)+'%':'0%';localStorage.setItem('forex_trades',JSON.stringify(trades));}
-function tambahTrade(){const t={tanggal:document.getElementById('tanggal').value||new Date().toISOString().split('T')[0],pair:document.getElementById('pair').value,posisi:document.getElementById('posisi').value,lot:document.getElementById('lot').value,entry:document.getElementById('entry').value,exitPrice:document.getElementById('exitPrice').value,profit:parseFloat(document.getElementById('profit').value||0),strategi:document.getElementById('strategi').value,catatan:document.getElementById('catatan').value};if(!t.profit&&t.profit!==0){alert('Isi profit dulu!');return;}trades.unshift(t);render();document.getElementById('profit').value='';document.getElementById('catatan').value='';alert('Trade disimpan!');}
-function hapus(i){if(confirm('Hapus trade ini?')){trades.splice(i,1);render();}}
-function hapusSemua(){if(confirm('Hapus SEMUA data?')){trades=[];render();}}
-document.getElementById('tanggal').valueAsDate=new Date();render();
-</script>
-</body>
-</html>
+<div id="appPage" style="display:none"><div style="max-width:480px;margin:0 auto">
+<div style="padding:16px;border-bottom:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#070708;z-index:10"><div><b>SENGKU PRO</b><p id="userEmail" class="small"></p></div><button onclick="logout()" style="background:#1a1a1a;border:1px solid #222;border-radius:20px;padding:8px 16px;color:#fff;font-size:12px">Keluar</button></div>
+<div style="padding:16px">
+<div class="grid3"><div class="stat"><p class="small">TOTAL PNL</p><p id="totalPnl" style="font-size:18px;font-weight:900;margin-top:4px">$0</p></div><div class="stat"><p class="small">WINRATE</p><p id="winrate" style="font-size:18px;font-weight:900;margin-top:4px">0%</p></div><div class="stat"><p class="small">TRADES</p><p id="totalTrades" style="font-size:18px;font-weight:900;margin-top:4px">0</p></div></div>
+<div class="card" style="margin-bottom:16px"><b style="font-size:14px">+ Trade Baru XAUUSD</b><div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px"><select id="pair"><option>XAUUSD</option><option>EURUSD</option><option>GBPUSD</option><option>BTCUSD</option></select><select id="type"><option>BUY</option><option>SELL</option></select></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="entry" type="number" placeholder="Entry: 4023"><input id="pnl" type="number" placeholder="PnL: 35 / -20"></div><textarea id="note" placeholder="Kenapa entry?"></textarea><button class="btn" onclick="addTrade()">SIMPAN KE CLOUD 🔒</button><p id="saveMsg" class="small" style="text-align:center;margin-top:8px"></p></div><div id="tradeList"></div>
+</div></div></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// === CONFIG LENGKAP PUNYA LU - UDAH GABUNG ===
+const firebaseConfig = {
+  apiKey: "AIzaSyDXuveftNQPLHw_2CQ4gLiB1MqGx8u8Fjg",
+  authDomain: "catatan-trading-forex.firebaseapp.com",
+  projectId: "catatan-trading-forex",
+  storageBucket: "catatan-trading-forex.firebasestorage.app",
+  messagingSenderId: "615987792529",
+  appId: "1:615987792529:web:228d5253a125b43d324d30"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.handleAuth = async () => {
+  const email=document.getElementById('emailInput').value.trim();
+  const pass=document.getElementById('passInput').value.trim();
+  const msg=document.getElementById('authMsg');
+  const btn=document.getElementById('loginBtn');
+  if(!email||!pass){msg.innerText="Isi email & password!";return}
+  if(pass.length<6){msg.innerText="Password min 6!";return}
+  btn.innerText="LOADING...";btn.disabled=true;msg.innerText="";
+  try{await signInWithEmailAndPassword(auth,email,pass);}catch(err){
+    if(err.code==='auth/user-not-found'||err.code==='auth/invalid-credential'||err.code==='auth/invalid-login-credentials'){
+      try{await createUserWithEmailAndPassword(auth,email,pass);}catch(e2){msg.innerText=e2.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return}
+    }else{msg.innerText=err.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return}
+  }
+  btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;
+};
+window.logout=async()=>{await signOut
