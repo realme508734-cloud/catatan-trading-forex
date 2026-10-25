@@ -6,17 +6,14 @@
 <title>SENGKU PRO - Jurnal XAUUSD</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#070708;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+body{background:#070708;color:#fff;font-family:-apple-system,sans-serif}
 .card{background:#151515;border:1px solid #222;border-radius:24px;padding:24px}
-.btn{width:100%;background:#fff;color:#000;font-weight:900;padding:16px;border-radius:16px;border:0;font-size:15px;cursor:pointer}
-.btn:disabled{opacity:.5}
-input,select,textarea{width:100%;background:#111;border:1px solid #222;border-radius:12px;padding:14px;color:#fff;margin-bottom:12px;font-size:14px;outline:none}
+input,select{width:100%;background:#111;border:1px solid #222;border-radius:12px;padding:12px;color:#fff;margin-bottom:12px}
+.btn{width:100%;background:#fff;color:#000;font-weight:900;padding:16px;border-radius:12px;border:none;cursor:pointer}
+.badge-buy{background:#052e16;color:#22c55e;border:1px solid #14532d;padding:3px 8px;border-radius:20px;font-size:11px}
+.badge-sell{background:#2e0505;color:#ef4444;border:1px solid #7f1d1d;padding:3px 8px;border-radius:20px;font-size:11px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
 .stat{background:#151515;border:1px solid #222;border-radius:16px;padding:14px;text-align:center}
-.trade{background:#151515;border:1px solid #222;border-radius:16px;padding:14px;margin-bottom:10px;display:flex;justify-content:space-between}
-.badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:700}
-.badge-buy{background:#052e16;color:#22c55e;border:1px solid #14532d}
-.badge-sell{background:#2e0505;color:#ef4444;border:1px solid #7f1d1d}
 .small{font-size:11px;color:#666}
 </style>
 </head>
@@ -24,67 +21,66 @@ input,select,textarea{width:100%;background:#111;border:1px solid #222;border-ra
 <div id="loginPage" style="max-width:400px;margin:0 auto;min-height:100vh;display:flex;align-items:center;padding:20px">
 <div class="card" style="width:100%">
 <h1 style="font-size:28px;font-weight:900">SENGKU PRO</h1>
-<p style="color:#888;font-size:13px;margin-bottom:16px">Jurnal XAUUSD • Cloud Active</p>
-<div style="background:#111;border:1px solid #22c55e33;border-radius:12px;padding:12px;margin-bottom:16px"><p style="font-size:11px;color:#22c55e;font-weight:700">● CONFIG ASLI TERPASANG - SIAP JUALAN</p><p style="font-size:10px;color:#888;margin-top:4px">Project: catatan-trading-forex<br>Auth: Email/Password Enabled ✅</p></div>
+<p style="color:#888;font-size:13px;margin-bottom:16px">Jurnal XAUUSD • Cloud ☁️</p>
 <input id="emailInput" type="email" placeholder="Email" value="realme508734@gmail.com">
 <input id="passInput" type="password" placeholder="Password min 6">
-<button class="btn" id="loginBtn" onclick="handleAuth()">MASUK / DAFTAR 🔥</button>
+<button id="loginBtn" class="btn" onclick="handleAuth()">MASUK / DAFTAR 🔥</button>
 <p id="authMsg" class="small" style="text-align:center;margin-top:12px;color:#ef4444"></p>
-</div>
-</div>
-<div id="appPage" style="display:none"><div style="max-width:480px;margin:0 auto">
-<div style="padding:16px;border-bottom:1px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#070708;z-index:10"><div><b>SENGKU PRO</b><p id="userEmail" class="small"></p></div><button onclick="logout()" style="background:#1a1a1a;border:1px solid #222;border-radius:20px;padding:8px 16px;color:#fff;font-size:12px">Keluar</button></div>
-<div style="padding:16px">
-<div class="grid3"><div class="stat"><p class="small">TOTAL PNL</p><p id="totalPnl" style="font-size:18px;font-weight:900;margin-top:4px">$0</p></div><div class="stat"><p class="small">WINRATE</p><p id="winrate" style="font-size:18px;font-weight:900;margin-top:4px">0%</p></div><div class="stat"><p class="small">TRADES</p><p id="totalTrades" style="font-size:18px;font-weight:900;margin-top:4px">0</p></div></div>
-<div class="card" style="margin-bottom:16px"><b style="font-size:14px">+ Trade Baru XAUUSD</b><div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px"><select id="pair"><option>XAUUSD</option><option>EURUSD</option><option>GBPUSD</option><option>BTCUSD</option></select><select id="type"><option>BUY</option><option>SELL</option></select></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="entry" type="number" placeholder="Entry: 4023"><input id="pnl" type="number" placeholder="PnL: 35 / -20"></div><textarea id="note" placeholder="Kenapa entry?"></textarea><button class="btn" onclick="addTrade()">SIMPAN KE CLOUD 🔒</button><p id="saveMsg" class="small" style="text-align:center;margin-top:8px"></p></div><div id="tradeList"></div>
-</div></div></div>
+</div></div>
+<div id="appPage" style="display:none"><div style="max-width:480px;margin:0 auto;padding:16px">
+<div style="display:flex;justify-content:space-between"><b>SENGKU PRO</b><button onclick="handleLogout()" style="background:#222;color:#fff;border:none;padding:6px 12px;border-radius:8px">Logout</button></div>
+<div class="grid3"><div class="stat"><p class="small">TOTAL PNL</p><p id="totalPnl" style="font-size:18px;font-weight:900">$0.00</p></div><div class="stat"><p class="small">WIN RATE</p><p id="winRate" style="font-size:18px;font-weight:900">0%</p></div><div class="stat"><p class="small">TOTAL</p><p id="totalTrade" style="font-size:18px;font-weight:900">0</p></div></div>
+<div class="card"><b>+ Trade Baru</b><br><br>
+<select id="typeInput"><option value="BUY">BUY</option><option value="SELL">SELL</option></select>
+<input id="entryInput" type="number" placeholder="Entry Price">
+<input id="lotInput" type="number" placeholder="Lot 0.10">
+<input id="pnlInput" type="number" placeholder="PnL $">
+<input id="noteInput" type="text" placeholder="Catatan">
+<button class="btn" onclick="addTrade()">SIMPAN ☁️</button></div>
+<div id="listTrade" style="margin-top:16px"></div>
+</div></div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-
-  const firebaseConfig = {
-  apiKey: "AIzaSyDXuveftNQPLHw_2CQ4gLiB1MqGx8u8Fjg",
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyDXuvefTNQPLHm_2CQ4gLiB1MQx8u8Fjg",
   authDomain: "catatan-trading-forex.firebaseapp.com",
   projectId: "catatan-trading-forex",
   storageBucket: "catatan-trading-forex.firebasestorage.app",
   messagingSenderId: "615987792529",
-  appId: "1:615987792529:web:228d5253a125b43d324d30"
-
+  appId: "1:615987792529:web:228d5253a125b43d24d30"
+};
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
 window.handleAuth = async () => {
-  const email = document.getElementById('emailInput').value.trim();
-  const pass = document.getElementById('passInput').value.trim();
-  const msg = document.getElementById('authMsg');
-  const btn = document.getElementById('loginBtn');
-  if(!email||!pass){msg.innerText="Isi email & password!";return}
-  if(pass.length<6){msg.innerText="Password min 6!";return}
+  const email=document.getElementById('emailInput').value.trim();
+  const pass=document.getElementById('passInput').value.trim();
+  const msg=document.getElementById('authMsg');
+  const btn=document.getElementById('loginBtn');
+  if(!email||!pass){msg.innerText="Isi email & pass!";return;}
+  if(pass.length<6){msg.innerText="Pass min 6!";return;}
   btn.innerText="LOADING...";btn.disabled=true;msg.innerText="";
-  try{
-    await signInWithEmailAndPassword(auth,email,pass);
-  }catch(err){
-    if(err.code=='auth/user-not-found' || err.code=='auth/invalid-credential' || err.code=='auth/invalid-login-credentials'){
-      try{ await createUserWithEmailAndPassword(auth,email,pass); }
-      catch(e2){ msg.innerText=e2.message; btn.innerText="MASUK / DAFTAR 🔥"; btn.disabled=false; return; }
-    }else{
-      msg.innerText=err.message; btn.innerText="MASUK / DAFTAR 🔥"; btn.disabled=false; return;
-    }
+  try{await signInWithEmailAndPassword(auth,email,pass);}catch(e){
+    if(e.code.includes("invalid-credential")||e.code.includes("user-not-found")){
+      try{await createUserWithEmailAndPassword(auth,email,pass);}catch(err){msg.innerText=err.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return;}
+    }else{msg.innerText=e.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return;}
   }
-  btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;
 };
-
 onAuthStateChanged(auth,(user)=>{
-  if(user){
-    document.getElementById('loginPage').style.display='none';
-    document.getElementById('appPage').style.display='block';
-  }else{
-    document.getElementById('loginPage').style.display='flex';
-    document.getElementById('appPage').style.display='none';
-  }
+  if(user){document.getElementById('loginPage').style.display="none";document.getElementById('appPage').style.display="block";loadTrades(user.uid);}
+  else{document.getElementById('loginPage').style.display="flex";document.getElementById('appPage').style.display="none";document.getElementById('loginBtn').innerText="MASUK / DAFTAR 🔥";document.getElementById('loginBtn').disabled=false;}
 });
-
-window.logout=async()=>{ await signOut(auth); };
+window.handleLogout=async()=>{await signOut(auth);};
+function loadTrades(uid){
+  const q=query(collection(db,"users",uid,"trades"),orderBy("createdAt","desc"));
+  onSnapshot(q,(snap)=>{let total=0,win=0,list=[];snap.forEach(d=>{const data=d.data();list.push({id:d.id,...data});total+=parseFloat(data.pnl||0);if(parseFloat(data.pnl)>0)win++;});
+  document.getElementById('totalPnl').innerText="$"+total.toFixed(2);document.getElementById('totalTrade').innerText=list.length;document.getElementById('winRate').innerText=list.length?Math.round(win/list.length*100)+"%":"0%";
+  const c=document.getElementById('listTrade');c.innerHTML="";list.forEach(t=>{c.innerHTML+=`<div class="card" style="margin-bottom:10px;display:flex;justify-content:space-between"><div>${t.type} ${t.entry} ${t.lot} lot<br><span class="small">${t.note||""}</span></div><div style="text-align:right"><b>$${t.pnl}</b><br><span class="small" onclick="delTrade('${t.id}')" style="cursor:pointer">hapus</span></div></div>`;});});
+}
+window.addTrade=async()=>{const u=auth.currentUser;if(!u)return;const type=document.getElementById('typeInput').value;const entry=document.getElementById('entryInput').value;const lot=document.getElementById('lotInput').value;const pnl=document.getElementById('pnlInput').value;const note=document.getElementById('noteInput').value;if(!pnl){alert("Isi PnL!");return;}await addDoc(collection(db,"users",u.uid,"trades"),{type,entry,lot,pnl:parseFloat(pnl),note,createdAt:serverTimestamp()});document.getElementById('pnlInput').value="";};
+window.delTrade=async(id)=>{const u=auth.currentUser;if(confirm("Hapus?"))await deleteDoc(doc(db,"users",u.uid,"trades",id));};
+</script>
+</body>
+</html>
