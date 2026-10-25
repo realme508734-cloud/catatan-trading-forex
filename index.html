@@ -10,11 +10,11 @@ body{background:#070708;color:#fff;font-family:-apple-system,sans-serif}
 .card{background:#151515;border:1px solid #222;border-radius:24px;padding:24px}
 input,select{width:100%;background:#111;border:1px solid #222;border-radius:12px;padding:12px;color:#fff;margin-bottom:12px}
 .btn{width:100%;background:#fff;color:#000;font-weight:900;padding:16px;border-radius:12px;border:none;cursor:pointer}
-.badge-buy{background:#052e16;color:#22c55e;border:1px solid #14532d;padding:3px 8px;border-radius:20px;font-size:11px}
-.badge-sell{background:#2e0505;color:#ef4444;border:1px solid #7f1d1d;padding:3px 8px;border-radius:20px;font-size:11px}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
 .stat{background:#151515;border:1px solid #222;border-radius:16px;padding:14px;text-align:center}
 .small{font-size:11px;color:#666}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+.badge-buy{background:#052e16;color:#22c55e;padding:3px 8px;border-radius:20px;font-size:11px}
+.badge-sell{background:#2e0505;color:#ef4444;padding:3px 8px;border-radius:20px;font-size:11px}
 </style>
 </head>
 <body>
@@ -22,21 +22,21 @@ input,select{width:100%;background:#111;border:1px solid #222;border-radius:12px
 <div class="card" style="width:100%">
 <h1 style="font-size:28px;font-weight:900">SENGKU PRO</h1>
 <p style="color:#888;font-size:13px;margin-bottom:16px">Jurnal XAUUSD • Cloud ☁️</p>
-<input id="emailInput" type="email" placeholder="Email" value="realme508734@gmail.com">
+<input id="emailInput" type="email" value="realme508734@gmail.com">
 <input id="passInput" type="password" placeholder="Password min 6">
 <button id="loginBtn" class="btn" onclick="handleAuth()">MASUK / DAFTAR 🔥</button>
 <p id="authMsg" class="small" style="text-align:center;margin-top:12px;color:#ef4444"></p>
 </div></div>
 <div id="appPage" style="display:none"><div style="max-width:480px;margin:0 auto;padding:16px">
-<div style="display:flex;justify-content:space-between"><b>SENGKU PRO</b><button onclick="handleLogout()" style="background:#222;color:#fff;border:none;padding:6px 12px;border-radius:8px">Logout</button></div>
-<div class="grid3"><div class="stat"><p class="small">TOTAL PNL</p><p id="totalPnl" style="font-size:18px;font-weight:900">$0.00</p></div><div class="stat"><p class="small">WIN RATE</p><p id="winRate" style="font-size:18px;font-weight:900">0%</p></div><div class="stat"><p class="small">TOTAL</p><p id="totalTrade" style="font-size:18px;font-weight:900">0</p></div></div>
-<div class="card"><b>+ Trade Baru</b><br><br>
+<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1a1a1a;padding-bottom:12px"><b>SENGKU PRO</b><div><span id="userEmail" class="small"></span><button onclick="handleLogout()" style="background:#222;color:#fff;border:none;padding:6px 12px;border-radius:8px;margin-left:8px">Logout</button></div></div>
+<div class="grid3"><div class="stat"><p class="small">TOTAL PNL</p><p id="totalPnl" style="font-size:18px;font-weight:900">$0.00</p></div><div class="stat"><p class="small">WIN RATE</p><p id="winRate" style="font-size:18px;font-weight:900">0%</p></div><div class="stat"><p class="small">TRADE</p><p id="totalTrade" style="font-size:18px;font-weight:900">0</p></div></div>
+<div class="card"><b>+ Trade Baru XAUUSD</b><br><br>
 <select id="typeInput"><option value="BUY">BUY</option><option value="SELL">SELL</option></select>
-<input id="entryInput" type="number" placeholder="Entry Price">
-<input id="lotInput" type="number" placeholder="Lot 0.10">
-<input id="pnlInput" type="number" placeholder="PnL $">
+<input id="entryInput" type="number" step="0.01" placeholder="Entry Price (misal 2650.50)">
+<input id="lotInput" type="number" step="0.01" placeholder="Lot 0.10">
+<input id="pnlInput" type="number" step="0.01" placeholder="PnL $ -5 atau 10">
 <input id="noteInput" type="text" placeholder="Catatan">
-<button class="btn" onclick="addTrade()">SIMPAN ☁️</button></div>
+<button class="btn" onclick="addTrade()">SIMPAN KE CLOUD ☁️</button></div>
 <div id="listTrade" style="margin-top:16px"></div>
 </div></div>
 <script type="module">
@@ -44,12 +44,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 const firebaseConfig = {
-  apiKey: "AIzaSyDXuvefTNQPLHm_2CQ4gLiB1MQx8u8Fjg",
+  apiKey: "AIzaSyDXuveftNQPLHw_2CQ4gLiB1MqGx8u8Fjg",
   authDomain: "catatan-trading-forex.firebaseapp.com",
   projectId: "catatan-trading-forex",
   storageBucket: "catatan-trading-forex.firebasestorage.app",
   messagingSenderId: "615987792529",
-  appId: "1:615987792529:web:228d5253a125b43d24d30"
+  appId: "1:615987792529:web:228d5253a125b43d324d30"
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -63,23 +63,38 @@ window.handleAuth = async () => {
   if(pass.length<6){msg.innerText="Pass min 6!";return;}
   btn.innerText="LOADING...";btn.disabled=true;msg.innerText="";
   try{await signInWithEmailAndPassword(auth,email,pass);}catch(e){
-    if(e.code.includes("invalid-credential")||e.code.includes("user-not-found")){
+    if(e.code.includes("invalid-credential")||e.code.includes("user-not-found")||e.code.includes("invalid-login")){
       try{await createUserWithEmailAndPassword(auth,email,pass);}catch(err){msg.innerText=err.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return;}
     }else{msg.innerText=e.message;btn.innerText="MASUK / DAFTAR 🔥";btn.disabled=false;return;}
   }
 };
 onAuthStateChanged(auth,(user)=>{
-  if(user){document.getElementById('loginPage').style.display="none";document.getElementById('appPage').style.display="block";loadTrades(user.uid);}
+  if(user){document.getElementById('loginPage').style.display="none";document.getElementById('appPage').style.display="block";document.getElementById('userEmail').innerText=user.email;loadTrades(user.uid);}
   else{document.getElementById('loginPage').style.display="flex";document.getElementById('appPage').style.display="none";document.getElementById('loginBtn').innerText="MASUK / DAFTAR 🔥";document.getElementById('loginBtn').disabled=false;}
 });
 window.handleLogout=async()=>{await signOut(auth);};
 function loadTrades(uid){
   const q=query(collection(db,"users",uid,"trades"),orderBy("createdAt","desc"));
-  onSnapshot(q,(snap)=>{let total=0,win=0,list=[];snap.forEach(d=>{const data=d.data();list.push({id:d.id,...data});total+=parseFloat(data.pnl||0);if(parseFloat(data.pnl)>0)win++;});
-  document.getElementById('totalPnl').innerText="$"+total.toFixed(2);document.getElementById('totalTrade').innerText=list.length;document.getElementById('winRate').innerText=list.length?Math.round(win/list.length*100)+"%":"0%";
-  const c=document.getElementById('listTrade');c.innerHTML="";list.forEach(t=>{c.innerHTML+=`<div class="card" style="margin-bottom:10px;display:flex;justify-content:space-between"><div>${t.type} ${t.entry} ${t.lot} lot<br><span class="small">${t.note||""}</span></div><div style="text-align:right"><b>$${t.pnl}</b><br><span class="small" onclick="delTrade('${t.id}')" style="cursor:pointer">hapus</span></div></div>`;});});
+  onSnapshot(q,(snap)=>{
+    let total=0,win=0,list=[];snap.forEach(d=>{const data=d.data();list.push({id:d.id,...data});total+=parseFloat(data.pnl||0);if(parseFloat(data.pnl)>0)win++;});
+    document.getElementById('totalPnl').innerText="$"+total.toFixed(2);document.getElementById('totalTrade').innerText=list.length;document.getElementById('winRate').innerText=list.length?Math.round(win/list.length*100)+"%":"0%";
+    const c=document.getElementById('listTrade');c.innerHTML="";list.forEach(t=>{
+      const badge=t.type==="BUY"?'<span class="badge-buy">BUY</span>':'<span class="badge-sell">SELL</span>';
+      c.innerHTML+=`<div class="card" style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center"><div><div>${badge} <b>${t.entry||""}</b> • ${t.lot||""} lot</div><div class="small">${t.note||""}</div></div><div style="text-align:right"><b style="color:${t.pnl>=0?'#22c55e':'#ef4444'}">$${t.pnl}</b><br><span class="small" style="cursor:pointer" onclick="delTrade('${t.id}')">hapus</span></div></div>`;
+    });
+  });
 }
-window.addTrade=async()=>{const u=auth.currentUser;if(!u)return;const type=document.getElementById('typeInput').value;const entry=document.getElementById('entryInput').value;const lot=document.getElementById('lotInput').value;const pnl=document.getElementById('pnlInput').value;const note=document.getElementById('noteInput').value;if(!pnl){alert("Isi PnL!");return;}await addDoc(collection(db,"users",u.uid,"trades"),{type,entry,lot,pnl:parseFloat(pnl),note,createdAt:serverTimestamp()});document.getElementById('pnlInput').value="";};
+window.addTrade=async()=>{
+  const u=auth.currentUser;if(!u)return;
+  const type=document.getElementById('typeInput').value;
+  const entry=document.getElementById('entryInput').value;
+  const lot=document.getElementById('lotInput').value;
+  const pnl=document.getElementById('pnlInput').value;
+  const note=document.getElementById('noteInput').value;
+  if(!pnl){alert("Isi PnL!");return;}
+  await addDoc(collection(db,"users",u.uid,"trades"),{type,entry,lot,pnl:parseFloat(pnl),note,createdAt:serverTimestamp()});
+  document.getElementById('pnlInput').value="";document.getElementById('entryInput').value="";document.getElementById('noteInput').value="";
+};
 window.delTrade=async(id)=>{const u=auth.currentUser;if(confirm("Hapus?"))await deleteDoc(doc(db,"users",u.uid,"trades",id));};
 </script>
 </body>
